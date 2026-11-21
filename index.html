@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e8">
+  <meta name="description" content="An invitation to celebrate Mathu's twenty-first birthday on 24 November 2026.">
+  <title>For Mathu, with Love | 24 November 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f1e8;
+      --ivory: #fffcf6;
+      --ink: #342c28;
+      --muted: #83796d;
+      --berry: #753c42;
+      --berry-dark: #552e34;
+      --gold: #ad8957;
+      --gold-light: #d7c19a;
+      --rose: #bc8175;
+      --green: #566450;
+      --rule: rgba(92, 72, 50, .22);
+      --serif: "Bodoni Moda", Georgia, serif;
+      --display: "Allura", cursive;
+      --sans: "Manrope", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    body.locked { overflow: hidden; }
+    button, a { font: inherit; }
+    button { color: inherit; }
+    img { display: block; width: 100%; }
+    ::selection { background: var(--berry); color: var(--ivory); }
+
+    .invitation { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center start; padding: 36px clamp(28px, 7vw, 100px); overflow: auto; background: linear-gradient(90deg, rgba(58,35,38,.96) 0%, rgba(58,35,38,.86) 35%, rgba(58,35,38,.28) 100%), url("photo11.jpeg") 62% 42% / cover no-repeat; color: var(--ivory); transition: opacity .85s ease, visibility .85s ease; }
+    .invitation.is-open { opacity: 0; visibility: hidden; pointer-events: none; }
+    .invitation::before, .invitation::after { position: absolute; z-index: 3; content: ""; inset: 15px; border: 1px solid rgba(215,193,154,.5); pointer-events: none; }
+    .invitation::after { inset: 21px; border-color: rgba(215,193,154,.18); }
+    .invite-inner { position: relative; z-index: 2; width: min(100%, 560px); margin-left: clamp(0px, 3vw, 42px); padding: 24px 12px 30px; text-align: left; }
+    .invite-inner > * { animation: cover-rise .8s cubic-bezier(.2,.7,.2,1) both; }
+    .invite-inner > :nth-child(2) { animation-delay: .12s; }
+    .invite-inner > :nth-child(3) { animation-delay: .24s; }
+    .invite-inner > :nth-child(4) { animation-delay: .34s; }
+    .invite-inner > :nth-child(5) { animation-delay: .44s; }
+    .invite-inner > :nth-child(6) { animation-delay: .54s; }
+    .invite-inner > .enter-button { animation: cover-rise .8s cubic-bezier(.2,.7,.2,1) .54s both, button-attention 5.2s 2s ease-in-out infinite; }
+    .eyebrow { margin: 0; font-size: 10px; font-weight: 600; letter-spacing: .22em; line-height: 1.8; text-transform: uppercase; }
+    .invite-kicker { color: var(--gold-light); }
+    .invite-name { margin: 23px 0 7px; font: 400 clamp(66px, 8vw, 108px)/.88 var(--display); }
+    .invite-subtitle { margin: 0; color: #e7d8c6; font: italic 400 clamp(18px, 4vw, 26px)/1.4 var(--serif); }
+    .invite-rule { width: 50px; margin: 28px 0 20px; border: 0; border-top: 1px solid var(--gold); }
+    .invite-date { color: var(--gold-light); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; }
+    .enter-button { position: relative; display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 16px; margin-top: 28px; padding: 0 25px; overflow: hidden; border: 1px solid var(--gold-light); background: rgba(58,35,38,.28); color: var(--ivory); cursor: pointer; font-size: 10px; letter-spacing: .17em; text-transform: uppercase; transition: background .25s, color .25s, gap .25s; }
+    .enter-button::before { position: absolute; inset: -1px; background: linear-gradient(105deg, transparent 30%, rgba(215,193,154,.24) 50%, transparent 70%); content: ""; transform: translateX(-120%); pointer-events: none; animation: button-sheen 1.2s 1.1s ease-out both; }
+    .enter-button:hover { gap: 23px; background: var(--gold-light); color: var(--berry-dark); }
+    .enter-button:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible + label { outline: 2px solid var(--rose); outline-offset: 4px; }
+    .enter-arrow { font-size: 17px; line-height: 1; animation: invitation-arrow 2.8s 2s ease-in-out 2; }
+    .enter-button:hover .enter-arrow { transform: translateX(4px); }
+    .music-toggle { position: fixed; z-index: 25; top: 32px; right: 32px; display: inline-flex; width: 44px; height: 44px; min-height: 44px; align-items: center; justify-content: center; padding: 0; border: 1px solid rgba(215,193,154,.72); border-radius: 50%; background: rgba(58,35,38,.68); color: var(--ivory); cursor: pointer; backdrop-filter: blur(8px); transition: background .2s, color .2s, transform .2s; }
+    .music-toggle:hover { background: var(--gold-light); color: var(--berry-dark); }
+    .music-icon { color: var(--gold-light); font: 20px/1 var(--serif); }
+    .music-toggle:hover .music-icon { color: inherit; }
+    .music-toggle #musicLabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+
+    .site-header { position: sticky; z-index: 12; top: 0; display: grid; min-height: 64px; place-items: center; padding: 8px clamp(20px, 5vw, 60px); border-bottom: 1px solid rgba(92,72,50,.18); background: rgba(255,252,246,.76); text-align: center; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .site-header h1 { max-width: 100%; margin: 0; padding: 0 68px; color: var(--berry); font: 400 clamp(34px, 3.2vw, 48px)/.9 var(--display); }
+    .site-header h1 span { display: inline; }
+    body.invitation-open .music-toggle { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); }
+    .hero { display: grid; min-height: min(760px, 100svh); grid-template-columns: 1.02fr .98fr; padding: 34px clamp(22px, 7vw, 104px) 54px; gap: clamp(34px, 8vw, 116px); align-items: center; overflow: hidden; background: linear-gradient(90deg, rgba(45,28,31,.92) 0%, rgba(45,28,31,.8) 44%, rgba(45,28,31,.48) 100%), url("photo11.jpeg") center 42% / cover no-repeat; color: var(--ivory); }
+    .hero-copy { position: relative; z-index: 1; max-width: 520px; padding: 34px 0; }
+    .hero-copy::before { position: absolute; z-index: -1; top: 4px; left: -24px; width: 1px; height: 68px; background: var(--gold); content: ""; }
+    .hero-kicker { color: var(--gold-light); }
+    .hero h1 { margin: 23px 0 14px; font: 400 clamp(58px, 8.5vw, 112px)/.88 var(--display); letter-spacing: -.025em; }
+    .hero h1 em { color: var(--gold-light); font-weight: 400; }
+    .hero-note { max-width: 340px; margin: 22px 0 27px; color: #f0e2d4; font: 400 clamp(16px, 2.2vw, 19px)/1.7 var(--serif); }
+    .hero-date { display: flex; align-items: center; gap: 13px; color: var(--gold-light); font-size: 10px; font-weight: 600; letter-spacing: .17em; text-transform: uppercase; }
+    .hero-date::before { width: 28px; height: 1px; background: var(--gold); content: ""; }
+    .text-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 36px; padding-bottom: 8px; border: 0; border-bottom: 1px solid var(--gold-light); background: none; color: var(--ivory); cursor: pointer; font-size: 10px; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
+    .text-link span { font-size: 16px; transition: transform .2s; }
+    .text-link:hover span { transform: translateX(4px); }
+    .hero-photo { position: relative; width: min(100%, 440px); justify-self: center; padding: 6px; border: 1px solid rgba(173,137,87,.38); background: var(--ivory); box-shadow: 0 22px 50px rgba(52,44,40,.12); }
+    .hero-photo::before { position: absolute; inset: -12px 12px 12px -12px; border: 1px solid var(--gold-light); content: ""; }
+    .hero-photo::after { position: absolute; inset: 6px; background: linear-gradient(180deg, transparent 70%, rgba(35,25,22,.2)); content: ""; pointer-events: none; }
+    .hero-photo img { aspect-ratio: 4/5; object-fit: cover; object-position: center 27%; background: #e3d8c9; filter: saturate(.9); }
+    .photo-caption { position: absolute; z-index: 2; right: 12px; bottom: 12px; left: 12px; display: flex; justify-content: space-between; align-items: end; gap: 8px; color: white; text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+    .photo-caption span { font: italic 16px var(--serif); }
+    .upload-button { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 12px; border: 1px solid rgba(255,255,255,.75); background: rgba(40,30,27,.28); color: white; cursor: pointer; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; backdrop-filter: blur(8px); }
+    .upload-button:hover { background: rgba(40,30,27,.65); }
+    .file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+
+    .date-strip { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; padding: 27px clamp(18px, 7vw, 104px); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--ivory); text-align: center; }
+    .date-item + .date-item { border-left: 1px solid var(--rule); }
+    .date-item strong { display: block; color: var(--berry); font: 30px/1.1 var(--display); }
+    .date-item span { display: block; margin-top: 7px; color: var(--muted); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+    .section { padding: clamp(76px, 11vw, 138px) clamp(22px, 8vw, 120px); }
+    .section-heading { max-width: 620px; margin: 0 auto 52px; text-align: center; }
+    .section-heading .eyebrow { color: var(--berry); }
+    .section-heading h2 { margin: 15px 0 13px; font: 400 clamp(38px, 6vw, 64px)/1.06 var(--display); }
+    .section-heading p { max-width: 440px; margin: 0 auto; color: var(--muted); font: 400 16px/1.7 var(--serif); }
+
+    .countdown-section { position: relative; overflow: hidden; background: var(--berry-dark); color: var(--ivory); }
+    .countdown-section::before, .countdown-section::after { position: absolute; width: 300px; height: 300px; border: 1px solid rgba(215,193,154,.16); border-radius: 50%; content: ""; pointer-events: none; }
+    .countdown-section::before { top: -210px; left: -170px; }
+    .countdown-section::after { right: -200px; bottom: -240px; width: 380px; height: 380px; }
+    .countdown-section .section-heading .eyebrow { color: var(--gold-light); }
+    .countdown-section .section-heading h2 { font-size: clamp(35px, 5vw, 53px); }
+    .countdown-section .section-heading p { color: #ddcec0; }
+    .countdown { position: relative; z-index: 1; display: grid; width: min(100%, 680px); grid-template-columns: repeat(4, 1fr); margin: 0 auto; }
+    .count-unit { padding: 0 10px; text-align: center; }
+    .count-unit + .count-unit { border-left: 1px solid rgba(215,193,154,.3); }
+    .count-number { display: block; color: var(--gold-light); font: 400 clamp(45px, 8vw, 76px)/1 var(--display); font-variant-numeric: tabular-nums; }
+    .count-label { display: block; margin-top: 11px; color: #e5d7c9; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+    .birthday-passed { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; color: var(--gold-light); font: italic 24px/1.6 var(--serif); text-align: center; }
+    .wishes-section { background: var(--ivory); }
+    .wish-card { position: relative; max-width: 780px; margin: 0 auto; padding: clamp(32px, 6vw, 66px) clamp(24px, 8vw, 88px); border: 1px solid var(--rule); text-align: center; }
+    .wish-card::before, .wish-card::after { position: absolute; width: 22px; height: 22px; border-color: var(--gold); border-style: solid; content: ""; }
+    .wish-card::before { top: 9px; left: 9px; border-width: 1px 0 0 1px; }
+    .wish-card::after { right: 9px; bottom: 9px; border-width: 0 1px 1px 0; }
+    .wish-ornament { color: var(--rose); font: 30px var(--display); }
+    .wish-text { margin: 22px 0; font: 400 clamp(19px, 3vw, 25px)/1.8 var(--serif); }
+    .wish-signoff { color: var(--berry); font: italic 19px var(--serif); }
+
+    .gallery-section { background: var(--paper); }
+    .gallery-tools { display: flex; justify-content: center; margin: -27px 0 35px; }
+    .gallery-upload { border-color: var(--gold); background: transparent; color: var(--berry); text-shadow: none; backdrop-filter: none; }
+    .gallery-upload:hover { background: var(--berry); color: var(--ivory); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px; }
+    .gallery-item { position: relative; grid-column: span 4; min-width: 0; overflow: hidden; padding: 0; border: 0; background: #ded4c5; cursor: zoom-in; text-align: left; }
+    .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column: span 5; }
+    .gallery-item:nth-child(2), .gallery-item:nth-child(6) { grid-column: span 3; }
+    .gallery-item:nth-child(3), .gallery-item:nth-child(4) { grid-column: span 4; }
+    .gallery-item img { aspect-ratio: 4/5; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .4s; }
+    .gallery-item:nth-child(2) img, .gallery-item:nth-child(4) img { aspect-ratio: 3/4; }
+    .gallery-item:hover img { transform: scale(1.045); filter: brightness(.83); }
+    .gallery-item::after { position: absolute; inset: auto 0 0; height: 32%; background: linear-gradient(transparent, rgba(28,21,19,.5)); content: ""; opacity: .8; pointer-events: none; }
+    .gallery-caption { position: absolute; z-index: 1; bottom: 15px; left: 17px; color: white; font: italic 15px var(--serif); }
+    .gallery-item.is-uploaded { outline: 1px solid var(--gold); outline-offset: -1px; }
+    .closing { position: relative; padding: 88px 24px 80px; overflow: hidden; background: var(--green); color: var(--ivory); text-align: center; }
+    .closing::before { position: absolute; inset: 14px; border: 1px solid rgba(215,193,154,.48); content: ""; pointer-events: none; }
+    .closing .eyebrow { color: var(--gold-light); }
+    .closing h2 { position: relative; margin: 20px auto 12px; font: 400 clamp(42px, 7vw, 76px)/1.06 var(--display); }
+    .closing-name { color: #ead9c2; font: italic 22px var(--serif); }
+    .closing-date { margin-top: 29px; color: var(--gold-light); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+    .footer { padding: 20px; background: var(--green); color: rgba(255,252,246,.6); font-size: 9px; letter-spacing: .1em; text-align: center; }
+
+    .lightbox { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 55px 20px 24px; background: rgba(25,20,19,.94); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; }
+    .lightbox.is-visible { opacity: 1; visibility: visible; }
+    .lightbox img { width: auto; max-width: min(100%, 980px); max-height: 100%; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 16px; right: 20px; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.45); background: transparent; color: white; cursor: pointer; font-size: 24px; line-height: 1; }
+    .lightbox-caption { position: absolute; bottom: 12px; left: 0; width: 100%; color: #fff; font: italic 15px var(--serif); text-align: center; }
+    .petal { position: fixed; z-index: 4; top: -20px; width: 8px; height: 11px; border-radius: 80% 10% 70% 20%; background: rgba(188,129,117,.5); pointer-events: none; animation: drift linear forwards; }
+    .gold-spark { position: fixed; z-index: 4; top: -10px; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 8px rgba(215,193,154,.9); pointer-events: none; animation: drift linear forwards; }
+    .cover-glimmer { position: absolute; z-index: 1; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 12px 2px rgba(215,193,154,.8); pointer-events: none; animation: glimmer 5.5s ease-in-out forwards; }
+    .confetti-piece { position: fixed; z-index: 21; top: 38vh; left: 50vw; width: 5px; height: 9px; pointer-events: none; animation: celebrate 1.9s ease-out forwards; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .12s; }
+    .delay-2 { transition-delay: .24s; }
+    @keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes button-sheen { to { transform: translateX(120%); } }
+    @keyframes button-attention { 0%, 86%, 100% { translate: 0 0; rotate: 0deg; } 88% { translate: -3px 0; rotate: -.5deg; } 90% { translate: 3px 0; rotate: .5deg; } 92% { translate: -2px 0; rotate: -.25deg; } 94% { translate: 0 0; rotate: 0deg; } }
+    @keyframes invitation-arrow { 0%, 72%, 100% { transform: translateX(0); } 78% { transform: translateX(5px); } 86% { transform: translateX(0); } }
+    @keyframes cover-rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes glimmer { 0%, 100% { opacity: 0; transform: scale(.5); } 35%, 65% { opacity: .8; transform: scale(1); } }
+    @keyframes drift { to { transform: translate3d(var(--sway), 110vh, 0) rotate(600deg); opacity: 0; } }
+    @keyframes celebrate { 0% { opacity: 0; transform: translate(0,0) rotate(0); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x),var(--y)) rotate(var(--turn)); } }
+
+    @media (max-width: 700px) {
+      .site-header { min-height: 66px; padding: 6px 12px; }
+      .site-header h1 { padding: 0 52px 0 0; font-size: clamp(22px, 6.2vw, 27px); line-height: .9; }
+      .site-header h1 span { display: block; }
+      body.invitation-open .music-toggle { top: 50%; right: 8px; width: 44px; height: 44px; min-height: 44px; padding: 0; transform: translateY(-50%); }
+      .invitation { place-items: end start; padding: 34px 30px max(42px, env(safe-area-inset-bottom)); background-image: linear-gradient(180deg, rgba(58,35,38,.04) 0%, rgba(58,35,38,.12) 34%, rgba(58,35,38,.88) 65%, rgba(58,35,38,.98) 100%), url("photo11.jpeg"); background-position: center, 62% center; }
+      .invite-inner { width: 100%; margin-left: 0; padding: 10px 0 0; }
+      .invite-name { margin: 16px 0 8px; font-size: clamp(54px, 16vw, 80px); line-height: .88; }
+      .invite-subtitle { font-size: 22px; }
+      .invite-rule { margin: 20px 0 14px; }
+      .invite-date { font-size: 9px; letter-spacing: .16em; }
+      .enter-button { margin-top: 20px; }
+      .music-toggle { top: 18px; right: 18px; width: 44px; height: 44px; min-height: 44px; padding: 0; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 21px; padding: 36px 22px 40px; background-image: linear-gradient(180deg, rgba(45,28,31,.52) 0%, rgba(45,28,31,.78) 44%, rgba(45,28,31,.94) 100%), url("photo11.jpeg"); background-position: center, 62% 42%; }
+      .hero-copy { padding: 8px 0 0; }
+      .hero-copy::before { top: 0; height: 48px; }
+      .hero h1 { font-size: clamp(58px, 16.3vw, 94px); }
+      .hero-note { margin: 14px 0 17px; }
+      .text-link { margin-top: 18px; }
+      .hero-photo { width: min(82%, 390px); justify-self: end; margin-right: 10px; }
+      .date-strip { padding-inline: 9px; }
+      .date-item strong { font-size: 25px; }
+      .date-item span { font-size: 8px; letter-spacing: .09em; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+      .gallery-item, .gallery-item:nth-child(n) { grid-column: span 1; }
+      .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 2; }
+      .gallery-item img, .gallery-item:nth-child(n) img { aspect-ratio: 4/5; }
+    }
+    @media (max-width: 390px) {
+      .count-unit { padding-inline: 5px; }
+      .count-label { font-size: 8px; letter-spacing: .1em; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .petal, .gold-spark, .cover-glimmer, .confetti-piece { display: none; }
+    }
+  </style>
+</head>
+<body class="locked">
+  <section class="invitation" id="invitation" aria-label="Birthday invitation">
+    <div class="invite-inner">
+      <p class="eyebrow invite-kicker">You’re invited to celebrate</p>
+      <h1 class="invite-name">M. Mary<br>Mathurshana</h1>
+      <p class="invite-subtitle">Mathu’s 21st Birthday</p>
+      <hr class="invite-rule">
+      <p class="invite-date">Tuesday · 24 November 2026</p>
+      <button class="enter-button" id="enterButton" type="button">Open invitation <span class="enter-arrow" aria-hidden="true">→</span></button>
+    </div>
+  </section>
+  <audio id="birthdaySong" src="mp3.mp3" preload="metadata"></audio>
+
+  <main>
+    <header class="site-header"><h1>Welcome to Mathurshana <span>Birthday</span></h1><button class="music-toggle" id="musicToggle" type="button" aria-label="Play birthday song" aria-pressed="false" title="Play birthday song"><span class="music-icon" aria-hidden="true">♪</span><span id="musicLabel">Play song</span></button></header>
+    <section class="hero" id="home">
+      <div class="hero-copy reveal">
+        <p class="eyebrow hero-kicker">A day made for you</p>
+        <h1>Happy 21st<br>Birthday,<br><em>Mathu!</em></h1>
+        <p class="hero-note">A beautiful new chapter, a thousand little joys, and a day that’s all yours.</p>
+        <p class="hero-date">24 November 2026</p>
+        <a class="text-link" href="#countdown">The celebration awaits <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-photo reveal delay-1">
+        <!-- Replace the image URL here, or use Upload portrait to preview your own photo. -->
+        <img id="portrait" src="photo2.jpeg" alt="Mathu's portrait">
+        <div class="photo-caption"><span>Mathu, in her moment</span><label class="upload-button" for="portraitUpload">＋ Add portrait</label></div>
+        <input class="file-input" id="portraitUpload" type="file" accept="image/*" aria-label="Upload Mathu's portrait">
+      </div>
+    </section>
+
+    <section class="date-strip" aria-label="Birthday details">
+      <div class="date-item"><strong>21</strong><span>Wonderful years</span></div>
+      <div class="date-item"><strong>24.11</strong><span>A day to remember</span></div>
+      <div class="date-item"><strong>Mathu</strong><span>Our guest of honour</span></div>
+    </section>
+
+    <section class="section countdown-section" id="countdown">
+      <div class="section-heading reveal">
+        <p class="eyebrow">A little anticipation</p>
+        <h2>Until your special day</h2>
+        <p>Every lovely moment is bringing us closer to celebrating you.</p>
+      </div>
+      <div class="countdown" id="countdownClock" aria-label="Time remaining until Mathu's birthday">
+        <div class="count-unit"><span class="count-number" id="days">--</span><span class="count-label">Days</span></div>
+        <div class="count-unit"><span class="count-number" id="hours">--</span><span class="count-label">Hours</span></div>
+        <div class="count-unit"><span class="count-number" id="minutes">--</span><span class="count-label">Minutes</span></div>
+        <div class="count-unit"><span class="count-number" id="seconds">--</span><span class="count-label">Seconds</span></div>
+      </div>
+      <p class="birthday-passed" id="birthdayPassed" hidden>Today is all about you, Mathu. May this beautiful new chapter be your brightest yet.</p>
+    </section>
+
+    <section class="section wishes-section" id="wishes">
+      <div class="section-heading reveal">
+        <p class="eyebrow">A note from the heart</p>
+        <h2>For the loveliest soul</h2>
+      </div>
+      <div class="wish-card reveal delay-1">
+        <span class="wish-ornament" aria-hidden="true">✳</span>
+        <p class="wish-text">May this next chapter bring you the same warmth and joy you give to everyone around you. May you keep finding beauty in the little things, courage in every new beginning, and laughter in all the moments in between. You deserve a year as lovely as you are.</p>
+        <p class="wish-signoff">With all our love</p>
+      </div>
+    </section>
+
+    <section class="section gallery-section" id="gallery">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Little moments, forever</p>
+        <h2>A gallery for Mathu</h2>
+        <p>Some memories are too lovely not to keep close.</p>
+      </div>
+      <div class="gallery-tools">
+        <label class="upload-button gallery-upload" for="galleryUpload">＋ Add photographs</label>
+        <input class="file-input" id="galleryUpload" type="file" accept="image/*" multiple aria-label="Add photographs to Mathu's gallery">
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Mathu's photographs; photo2 matches the main portrait. -->
+        <button class="gallery-item reveal" type="button" aria-label="View Mathu by a stone wall"><img src="photo2.jpeg" alt="Mathu in a rose-colored sari by a stone wall" loading="lazy"><span class="gallery-caption">A lovely moment</span></button>
+        <button class="gallery-item reveal delay-1" type="button" aria-label="View Mathu's mirror portrait"><img src="photo1.jpeg" alt="Mathu in a pale pink blouse" loading="lazy"><span class="gallery-caption">Her own kind of magic</span></button>
+        <button class="gallery-item reveal delay-2" type="button" aria-label="View Mathu in a pink sari outdoors"><img src="photo3.jpeg" alt="Mathu in a pink sari at an outdoor gathering" loading="lazy"><span class="gallery-caption">In full bloom</span></button>
+        <button class="gallery-item reveal" type="button" aria-label="View Mathu among flowers"><img src="photo4.jpeg" alt="Mathu among a colorful flower display" loading="lazy"><span class="gallery-caption">Surrounded by beauty</span></button>
+        <button class="gallery-item reveal delay-1" type="button" aria-label="View Mathu by a green hedge"><img src="photo5.jpeg" alt="Mathu standing in front of a green hedge" loading="lazy"><span class="gallery-caption">A little sunshine</span></button>
+        <button class="gallery-item reveal delay-2" type="button" aria-label="View Mathu in uniform"><img src="photo6.jpeg" alt="Mathu in uniform indoors" loading="lazy"><span class="gallery-caption">A moment to remember</span></button>
+        <button class="gallery-item reveal" type="button" aria-label="View Mathu outdoors"><img src="photo7.jpeg" alt="Mathu outdoors on a sunny day" loading="lazy"><span class="gallery-caption">Golden days</span></button>
+        <button class="gallery-item reveal delay-1" type="button" aria-label="View Mathu at a themed shop"><img src="photo8.jpeg" alt="Mathu at a themed shop" loading="lazy"><span class="gallery-caption">A little adventure</span></button>
+        <button class="gallery-item reveal delay-2" type="button" aria-label="View Mathu in a pink sari"><img src="photo9.jpeg" alt="Mathu seated in a pink sari" loading="lazy"><span class="gallery-caption">With love, always</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <section class="closing">
+      <p class="eyebrow">With love, celebrating</p>
+      <h2>Mathu’s beautiful<br>21st birthday</h2>
+      <p class="closing-name">Here’s to everything wonderful ahead.</p>
+      <p class="closing-date">M. Mary Mathurshana · 24 November 2026</p>
+    </section>
+    <div class="footer">MADE WITH LOVE FOR MATHU · 2026</div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photograph">×</button>
+    <img id="lightboxImage" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <script>
+    const invitation = document.getElementById('invitation');
+    const enterButton = document.getElementById('enterButton');
+    const birthdaySong = document.getElementById('birthdaySong');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicLabel = document.getElementById('musicLabel');
+    const portraitUpload = document.getElementById('portraitUpload');
+    const galleryUpload = document.getElementById('galleryUpload');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const songStartTime = 100;
+    const songEndTime = 130;
+
+    enterButton.addEventListener('click', () => {
+      invitation.classList.add('is-open');
+      document.body.classList.remove('locked');
+      document.body.classList.add('invitation-open');
+      releaseConfetti();
+      playBirthdaySong();
+      window.setTimeout(() => document.getElementById('home').scrollIntoView(), 80);
+    });
+    function syncMusicControl() {
+      const isPlaying = !birthdaySong.paused;
+      musicLabel.textContent = isPlaying ? 'Pause song' : 'Play song';
+      musicToggle.setAttribute('aria-label', `${isPlaying ? 'Pause' : 'Play'} birthday song`);
+      musicToggle.setAttribute('aria-pressed', String(isPlaying));
+    }
+    async function playBirthdaySong() {
+      try {
+        await birthdaySong.play();
+      } catch {
+        syncMusicControl();
+      }
+    }
+    musicToggle.addEventListener('click', () => {
+      if (birthdaySong.paused) playBirthdaySong();
+      else birthdaySong.pause();
+    });
+    birthdaySong.addEventListener('play', syncMusicControl);
+    birthdaySong.addEventListener('pause', syncMusicControl);
+    birthdaySong.addEventListener('loadedmetadata', () => {
+      if (birthdaySong.currentTime < songStartTime) birthdaySong.currentTime = songStartTime;
+    });
+    birthdaySong.addEventListener('timeupdate', () => {
+      if (birthdaySong.currentTime >= songEndTime) birthdaySong.currentTime = songStartTime;
+    });
+    birthdaySong.addEventListener('ended', () => {
+      birthdaySong.currentTime = songStartTime;
+      playBirthdaySong();
+    });
+    function releaseConfetti() {
+      if (reducedMotion.matches) return;
+      const colors = ['#d7c19a', '#bc8175', '#fffcf6', '#ad8957'];
+      for (let index = 0; index < 24; index += 1) {
+        const piece = document.createElement('span');
+        piece.className = 'confetti-piece';
+        piece.style.background = colors[index % colors.length];
+        piece.style.setProperty('--x', `${Math.random() * 440 - 220}px`);
+        piece.style.setProperty('--y', `${120 + Math.random() * 260}px`);
+        piece.style.setProperty('--turn', `${Math.random() * 720 - 360}deg`);
+        piece.style.animationDelay = `${Math.random() * .28}s`;
+        document.body.append(piece);
+        window.setTimeout(() => piece.remove(), 2500);
+      }
+    }
+    portraitUpload.addEventListener('change', () => {
+      const [file] = portraitUpload.files;
+      if (file) document.getElementById('portrait').src = URL.createObjectURL(file);
+    });
+    galleryUpload.addEventListener('change', () => {
+      for (const file of galleryUpload.files) {
+        if (!file.type.startsWith('image/')) continue;
+        const item = document.createElement('button');
+        item.className = 'gallery-item is-uploaded';
+        item.type = 'button';
+        item.setAttribute('aria-label', 'View uploaded photograph in full screen');
+        const image = document.createElement('img');
+        image.src = URL.createObjectURL(file);
+        image.alt = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ') || 'Uploaded photograph';
+        const caption = document.createElement('span');
+        caption.className = 'gallery-caption';
+        caption.textContent = image.alt;
+        item.append(image, caption);
+        galleryGrid.prepend(item);
+      }
+      galleryUpload.value = '';
+    });
+
+    function openLightbox(item) {
+      const image = item.querySelector('img');
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+      lightboxCaption.textContent = item.querySelector('.gallery-caption')?.textContent || image.alt;
+      lightbox.classList.add('is-visible');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('locked');
+      lightboxClose.focus();
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('is-visible');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      lightboxImage.removeAttribute('src');
+    }
+    galleryGrid.addEventListener('click', (event) => {
+      const item = event.target.closest('.gallery-item');
+      if (item) openLightbox(item);
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightbox.classList.contains('is-visible')) closeLightbox();
+    });
+
+    const birthday = new Date(2026, 10, 24, 0, 0, 0);
+    const countdownClock = document.getElementById('countdownClock');
+    const birthdayPassed = document.getElementById('birthdayPassed');
+    function updateCountdown() {
+      const remaining = birthday.getTime() - Date.now();
+      if (remaining <= 0) {
+        countdownClock.hidden = true;
+        birthdayPassed.hidden = false;
+        return;
+      }
+      document.getElementById('days').textContent = String(Math.floor(remaining / 86400000)).padStart(2, '0');
+      document.getElementById('hours').textContent = String(Math.floor(remaining / 3600000) % 24).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(Math.floor(remaining / 60000) % 60).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(Math.floor(remaining / 1000) % 60).padStart(2, '0');
+    }
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+    if (!reducedMotion.matches) {
+      function releaseCoverGlimmer() {
+        if (document.hidden || invitation.classList.contains('is-open')) return;
+        const glimmer = document.createElement('span');
+        glimmer.className = 'cover-glimmer';
+        glimmer.setAttribute('aria-hidden', 'true');
+        glimmer.style.left = `${8 + Math.random() * 84}%`;
+        glimmer.style.top = `${10 + Math.random() * 80}%`;
+        invitation.append(glimmer);
+        window.setTimeout(() => glimmer.remove(), 6000);
+      }
+      window.setInterval(releaseCoverGlimmer, 1100);
+
+      function releasePetal() {
+        if (document.hidden) return;
+        const particle = document.createElement('span');
+        particle.className = Math.random() < .32 ? 'gold-spark' : 'petal';
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.setProperty('--sway', `${Math.random() * 100 - 50}px`);
+        particle.style.animationDuration = `${10 + Math.random() * 7}s`;
+        document.body.append(particle);
+        window.setTimeout(() => particle.remove(), 18000);
+      }
+      window.setInterval(releasePetal, 700);
+    }
+  </script>
+</body>
+</html>
